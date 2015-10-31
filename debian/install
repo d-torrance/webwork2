@@ -1,0 +1,12 @@
+bin usr/share/webwork
+clients usr/share/webwork
+conf usr/share/webwork
+courses.dist usr/share/webwork
+DATA usr/share/webwork
+doc usr/share/webwork
+htdocs usr/share/webwork
+lib usr/share/webwork
+logs usr/share/webwork
+snippets usr/share/webwork
+tmp usr/share/webwork
+VERSION usr/share/webwork

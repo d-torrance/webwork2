@@ -1,0 +1,22 @@
+Source: webwork
+Section: math
+Priority: optional
+Maintainer: Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>
+Uploaders: Doug Torrance <dtorrance@piedmont.edu>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://webwork.maa.org
+Vcs-Git: https://anonscm.debian.org/git/debian-science/packages/webwork2.git
+Vcs-Browser: http://anonscm.debian.org/cgit/debian-science/packages/webwork2.git
+
+Package: webwork
+Architecture: all
+Depends: ${perl:Depends}, ${misc:Depends}
+Description: Open source online homework system
+ WeBWorK is an open-source online homework system for math and sciences courses.
+ WeBWorK is supported by the MAA and the NSF and comes with an Open Problem
+ Library (OPL) of over 30,000 homework problems. Problems in the OPL target most
+ lower division undergraduate math courses and some advanced courses. Supported
+ courses include college algebra, discrete mathematics, probability and
+ statistics, single and multivariable calculus, differential equations, linear
+ algebra and complex analysis.
