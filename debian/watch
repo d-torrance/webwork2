@@ -1,0 +1,3 @@
+version=3
+https://github.com/openwebwork/webwork2/releases \
+/openwebwork/webwork2/archive/WeBWorK-(.+)\.tar\.gz
