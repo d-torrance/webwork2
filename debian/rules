@@ -2,5 +2,8 @@
 %:
 	dh $@
 
+override_dh_clean:
+	dh_clean -X.bak
+
 get-orig-source:
 	uscan --verbose --rename --force-download
