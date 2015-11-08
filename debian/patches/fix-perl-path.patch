@@ -1,0 +1,68 @@
+Description: Fix wrong-path-for-interpreter Lintian error.
+Author: Doug Torrance <dtorrance@piedmont.edu>
+Last-Update: 2015-11-08
+
+--- a/courses.dist/modelCourse/templates/setOrientation/parserOrientation.pl
++++ b/courses.dist/modelCourse/templates/setOrientation/parserOrientation.pl
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl
++#!/usr/bin/perl
+ 
+ ######################################################################
+ #
+--- a/lib/RQP.pm
++++ b/lib/RQP.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl   -w
++#!/usr/bin/perl   -w
+ 
+ 
+ use SOAP::Lite +trace; 
+--- a/lib/RQP/Render.pm
++++ b/lib/RQP/Render.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl   -w
++#!/usr/bin/perl   -w
+ 
+ package RQP::Render;
+ @ISA = qw( RQP );
+--- a/lib/WebworkWebservice/CourseActions.pm
++++ b/lib/WebworkWebservice/CourseActions.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl -w 
++#!/usr/bin/perl -w 
+ use strict;
+ use warnings;
+ 
+--- a/lib/WebworkWebservice/LibraryActions.pm
++++ b/lib/WebworkWebservice/LibraryActions.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl -w 
++#!/usr/bin/perl -w 
+ 
+ # Copyright (C) 2002 Michael Gage 
+ 
+--- a/lib/WebworkWebservice/MathTranslators.pm
++++ b/lib/WebworkWebservice/MathTranslators.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl -w 
++#!/usr/bin/perl -w 
+ 
+ # Copyright (C) 2002 Michael Gage 
+ 
+--- a/lib/WebworkWebservice/RenderProblem.pm
++++ b/lib/WebworkWebservice/RenderProblem.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl -w 
++#!/usr/bin/perl -w 
+ 
+ ################################################################################
+ # WeBWorK Online Homework Delivery System
+--- a/lib/WebworkWebservice/SetActions.pm
++++ b/lib/WebworkWebservice/SetActions.pm
+@@ -1,4 +1,4 @@
+-#!/usr/local/bin/perl -w 
++#!/usr/bin/perl -w 
+ 
+ # Copyright (C) 2002 Michael Gage 
+ 
