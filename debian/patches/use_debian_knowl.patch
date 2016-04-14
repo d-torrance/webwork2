@@ -1,0 +1,124 @@
+Description: Use Debian package for knowl.
+Author: Doug Torrance <dtorrance@piedmont.edu>
+Last-Update: 2016-04-14
+
+--- a/lib/WebworkClient.pm
++++ b/lib/WebworkClient.pm
+@@ -614,7 +614,7 @@
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/css/jquery-ui-1.8.18.custom.css"/>
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/css/vendor/font-awesome/css/font-awesome.min.css"/>
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/themes/math4/math4.css"/>
+-<link href="/webwork2_files/css/knowlstyle.css" rel="stylesheet" type="text/css" />
++<link href="/javascript/knowl/knowlstyle.css" rel="stylesheet" type="text/css" />
+ 
+ <!-- JS Loads -->
+ <script type="text/javascript" src="/webwork2_files/js/vendor/jquery/jquery.js"></script>
+@@ -627,7 +627,7 @@
+ <script src="/webwork2_files/js/apps/Base64/Base64.js" type="text/javascript"></script>
+ <script src="/webwork2_files/mathjax/MathJax.js?config=TeX-MML-AM_HTMLorMML-full" type="text/javascript"></script>
+ <script type="textx/javascript" src="/webwork2_files/js/vendor/underscore/underscore.js"></script>
+-<script type="text/javascript" src="/webwork2_files/js/legacy/vendor/knowl.js"></script>
++<script type="text/javascript" src="/javascript/knowl/knowl.min.js></script>
+ <script src="/webwork2_files/js/apps/Problem/problem.js" type="text/javascript"></script>
+ <script type="text/javascript" src="/webwork2_files/themes/math4/math4.js"></script>	
+ <script type="text/javascript" src="/webwork2_files/js/vendor/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+@@ -690,7 +690,7 @@
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/css/jquery-ui-1.8.18.custom.css"/>
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/css/vendor/font-awesome/css/font-awesome.min.css"/>
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/themes/math4/math4.css"/>
+-<link href="/webwork2_files/css/knowlstyle.css" rel="stylesheet" type="text/css" />
++<link href="/javascript/knowl/knowlstyle.css" rel="stylesheet" type="text/css" />
+ 
+ <!-- JS Loads -->
+ <script type="text/javascript" src="/webwork2_files/js/vendor/jquery/jquery.js"></script>
+@@ -703,7 +703,7 @@
+ <script src="/webwork2_files/js/apps/Base64/Base64.js" type="text/javascript"></script>
+ <script src="/webwork2_files/mathjax/MathJax.js?config=TeX-MML-AM_HTMLorMML-full" type="text/javascript"></script>
+ <script type="textx/javascript" src="/webwork2_files/js/vendor/underscore/underscore.js"></script>
+-<script type="text/javascript" src="/webwork2_files/js/legacy/vendor/knowl.js"></script>
++<script type="text/javascript" src="/javascript/knowl/knowl.min.js"></script>
+ <script src="/webwork2_files/js/apps/Problem/problem.js" type="text/javascript"></script>
+ <script type="text/javascript" src="/webwork2_files/themes/math4/math4.js"></script>	
+ <script type="text/javascript" src="/webwork2_files/js/vendor/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+@@ -763,7 +763,7 @@
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/css/jquery-ui-1.8.18.custom.css"/>
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/css/vendor/font-awesome/css/font-awesome.min.css"/>
+ <link rel="stylesheet" type="text/css" href="/webwork2_files/themes/math4/math4.css"/>
+-<link href="/webwork2_files/css/knowlstyle.css" rel="stylesheet" type="text/css" />
++<link href="/javascript/knowl/knowlstyle.css" rel="stylesheet" type="text/css" />
+ 
+ <!-- JS Loads -->
+ <script type="text/javascript" src="/webwork2_files/js/vendor/jquery/jquery.js"></script>
+@@ -778,7 +778,7 @@
+ <script src="/webwork2_files/js/apps/Base64/Base64.js" type="text/javascript"></script>
+ <script src="/webwork2_files/mathjax/MathJax.js?config=TeX-MML-AM_HTMLorMML-full" type="text/javascript"></script>
+ <script type="textx/javascript" src="/webwork2_files/js/vendor/underscore/underscore.js"></script>
+-<script type="text/javascript" src="/webwork2_files/js/legacy/vendor/knowl.js"></script>
++<script type="text/javascript" src="/javascript/knowl/knowl.min.js"></script>
+ <script src="/webwork2_files/js/apps/LocalStorage/localstorage.js" type="text/javascript"></script>
+ <script src="/webwork2_files/js/apps/Problem/problem.js" type="text/javascript"></script>
+ <script type="text/javascript" src="/webwork2_files/themes/math4/math4.js"></script>	
+--- a/lib/WeBWorK/ContentGenerator/Instructor/ProblemSetDetail2.pm
++++ b/lib/WeBWorK/ContentGenerator/Instructor/ProblemSetDetail2.pm
+@@ -2575,8 +2575,8 @@
+ 	# The Base64.js file, which handles base64 encoding and decoding
+ 	print CGI::start_script({type=>"text/javascript", src=>"$site_url/js/apps/Base64/Base64.js"}), CGI::end_script();
+ 	print qq{
+-           <link href="$site_url/css/knowlstyle.css" rel="stylesheet" type="text/css" />
+-           <script type="text/javascript" src="$site_url/js/legacy/vendor/knowl.js"></script>};
++           <link href="/javascript/knowl/knowlstyle.css" rel="stylesheet" type="text/css" />
++           <script type="text/javascript" src="/javascript/knowl/knowl.min.js"></script>};
+ 	print "\n";
+     	print CGI::start_script({type=>"text/javascript", src=>"$site_url/js/vendor/jquery/modules/jquery.nestedSortable.js"}), CGI::end_script();
+     	print CGI::start_script({type=>"text/javascript", src=>"$site_url/js/apps/ProblemSetDetail2/problemsetdetail2.js"}), CGI::end_script();
+--- a/lib/WeBWorK/ContentGenerator/Instructor/SetMaker.pm
++++ b/lib/WeBWorK/ContentGenerator/Instructor/SetMaker.pm
+@@ -1702,7 +1702,7 @@
+   print qq!<script src="$webwork_htdocs_url/js/vendor/backbone/backbone.js"></script>!;
+   print CGI::start_script({type=>"text/javascript", src=>"$webwork_htdocs_url/js/apps/Base64/Base64.js"}), CGI::end_script();
+   print "\n";
+-  print qq{<script type="text/javascript" src="$webwork_htdocs_url/js/legacy/vendor/knowl.js"></script>};
++  print qq{<script type="text/javascript" src="/javascript/knowl/knowl.min.js"></script>};
+   print "\n";
+   print qq!<script src="$webwork_htdocs_url/js/apps/SetMaker/setmaker.js"></script>!;
+   print "\n";
+@@ -1726,7 +1726,7 @@
+   print qq!<link href="$webwork_htdocs_url/css/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>!;
+ 
+   print qq{
+-           <link href="$webwork_htdocs_url/css/knowlstyle.css" rel="stylesheet" type="text/css" />};
++           <link href="/javascript/knowl/knowlstyle.css" rel="stylesheet" type="text/css" />};
+ 
+   return '';
+ 
+--- a/lib/WeBWorK/ContentGenerator/GatewayQuiz.pm
++++ b/lib/WeBWorK/ContentGenerator/GatewayQuiz.pm
+@@ -2451,7 +2451,7 @@
+ 	    }
+ 	}
+ 
+-	print CGI::start_script({type=>"text/javascript", src=>"$site_url/js/vendor/other/knowl.js"}),CGI::end_script();
++	print CGI::start_script({type=>"text/javascript", src=>"/javascript/knowl/knowl.min.js"}),CGI::end_script();
+ 	#This is for page specfific js
+ 	print CGI::start_script({type=>"text/javascript", src=>"$site_url/js/apps/GatewayQuiz/gateway.js"}), CGI::end_script();
+ 	
+--- a/lib/WeBWorK/ContentGenerator/Problem.pm
++++ b/lib/WeBWorK/ContentGenerator/Problem.pm
+@@ -2314,7 +2314,7 @@
+         # Javascript and style for knowls
+         print qq{
+            <script type="text/javascript" src="$site_url/js/vendor/underscore/underscore.js"></script>
+-           <script type="text/javascript" src="$site_url/js/legacy/vendor/knowl.js"></script>};
++           <script type="text/javascript" src="/javascript/knowl/knowl.min.js"></script>};
+ 
+ 	# This is for tagging menus (if allowed)
+ 	if ($r->authz->hasPermissions($r->param('user'), "modify_tags")) {
+@@ -2336,7 +2336,7 @@
+ 
+         # Javascript and style for knowls
+         print qq{
+-           <link href="$site_url/css/knowlstyle.css" rel="stylesheet" type="text/css" />};
++           <link href="/javascript/knowl/knowlstyle.css" rel="stylesheet" type="text/css" />};
+ 
+ 	#style for mathview
+ 	if ($self->{will}->{useMathView}) {
