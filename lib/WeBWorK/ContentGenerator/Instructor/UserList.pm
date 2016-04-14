@@ -174,7 +174,16 @@ use constant  FIELD_PROPERTIES => {
 #		type => "number",
 #		size => 2,
 #		access => "readwrite",
-	}
+	},
+	displayMode => {
+	    access => 'hidden',
+	},
+	showOldAnswers => {
+	    access => 'hidden',
+	},
+	useMathView => {
+	    access => 'hidden',
+	},
 };
 sub pre_header_initialize {
 	my $self          = shift;
@@ -623,8 +632,18 @@ sub filter_form {
 	my $r = $self->r;
 	#return CGI::table({}, CGI::Tr({-valign=>"top"},
 	#	CGI::td({}, 
-	
+
 	my %prettyFieldNames = %{ $self->{prettyFieldNames} };
+	my %fieldProperties = %{ FIELD_PROPERTIES() };	
+
+	my @fields;
+	
+	foreach my $field (keys %fieldProperties) {
+	    push @fields, $field unless
+		$fieldProperties{$field}{access} eq 'hidden';
+	}
+
+	@fields = sort {$prettyFieldNames{$a} cmp $prettyFieldNames{$b}} @fields;
 	
 	return join("", 
 			$r->maketext("Show")." ",
@@ -671,7 +690,7 @@ sub filter_form {
 			" ".$r->maketext("in their")." ",
 			CGI::popup_menu(
 				-name => "action.filter.field",
-				-value => [ keys %{ FIELD_PROPERTIES() } ],
+				-value => \@fields,
 				-default => $actionParams{"action.filter.field"}->[0] || "user_id",
 				-labels => \%prettyFieldNames,
 				-onchange => $onChange,
@@ -1167,7 +1186,9 @@ sub saveEdit_handler {
 	my ($self, $genericParams, $actionParams, $tableParams) = @_;
 	my $r           = $self->r;
 	my $db          = $r->db;
-	
+	my $editorUser = $r->param('user');
+	my $editorUserPermission = $db->getPermissionLevel($editorUser)->permission;
+
 	my @visibleUserIDs = @{ $self->{visibleUserIDs} };
 	foreach my $userID (@visibleUserIDs) {
 		my $User = $db->getUser($userID); # checked
@@ -1183,7 +1204,8 @@ sub saveEdit_handler {
 		
 		foreach my $field ($PermissionLevel->NONKEYFIELDS()) {
 			my $param = "permission.${userID}.${field}";
-			if (defined $tableParams->{$param}->[0]) {
+			if (defined $tableParams->{$param}->[0] &&
+			    $tableParams->{$param}->[0] <= $editorUserPermission) {
 				$PermissionLevel->$field($tableParams->{$param}->[0]);
 			}
 		}
@@ -1435,7 +1457,11 @@ sub exportUsersToCSV {
 
 sub fieldEditHTML {
 	my ($self, $fieldName, $value, $properties) = @_;
-	my $ce = $self->r->ce;
+	my $r = $self->r;
+	my $db = $r->db;
+	my $editorUser = $r->param('user');
+	my $editorUserPermission = $db->getPermissionLevel($editorUser)->permission;
+	my $ce = $r->ce;
 	my $size = $properties->{size};
 	my $type = $properties->{type};
 	my $access = $properties->{access};
@@ -1519,6 +1545,7 @@ sub fieldEditHTML {
 		foreach my $role (sort {$roles{$a}<=>$roles{$b}} keys(%roles) ) {
 			my $val = $roles{$role};
 
+			next unless $val <= $editorUserPermission;
 			push(@values, $val);
 			$labels{$val} = $role;
 			$default = $val if ( $value eq $role );
@@ -1649,6 +1676,7 @@ sub recordEditHTML {
 		my $fieldName = 'user.' . $User->user_id . '.' . $field,
 		my $fieldValue = $User->$field;
 		my %properties = %{ FIELD_PROPERTIES()->{$field} };
+		next if $properties{access} eq 'hidden';
 		$properties{access} = 'readonly' unless $editMode;
 		$properties{type} = 'email' if ($field eq 'email_address' and !$editMode and !$passwordMode);
 		$fieldValue = $self->nbsp($fieldValue) unless $editMode;
@@ -1703,8 +1731,10 @@ sub printTableHTML {
 	#my $hrefPrefix = $r->uri . "?" . $self->url_args(@stateParams); # $self->url_authen_args
 	my @tableHeadings;
 	foreach my $field (@realFieldNames) {
-		my $result = $fieldNames{$field};
-		push @tableHeadings, $result;
+	    my %properties = %{ FIELD_PROPERTIES()->{$field} };
+	    next if $properties{access} eq 'hidden';
+	    my $result = $fieldNames{$field};
+	    push @tableHeadings, $result;
 	};
 	
 	# prepend selection checkbox? only if we're NOT editing!
