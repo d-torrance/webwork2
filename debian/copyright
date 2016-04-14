@@ -1,5 +1,5 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: webwork
+Upstream-Name: WeBWorK
 Source: https://github.com/openwebwork/webwork2
 Files-Excluded: htdocs/css/knowlstyle.css
  htdocs/js/legacy/vendor/knowl.js
