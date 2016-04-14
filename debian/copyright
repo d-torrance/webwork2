@@ -6,11 +6,11 @@ Files-Excluded: htdocs/css/knowlstyle.css
  htdocs/js/vendor/other/knowl.js
 
 Files: *
-Copyright: Copyright 2000-2015 The WeBWorK Project
+Copyright: Copyright 1996-2016 The WeBWorK Project
 License: GPL-2+ or Artistic
 
 Files: debian/*
-Copyright: 2015 Doug Torrance <dtorrance@piedmont.edu>
+Copyright: 2015-2016 Doug Torrance <dtorrance@piedmont.edu>
 License: GPL-2+
 
 License: GPL-2+
