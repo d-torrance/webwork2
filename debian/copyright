@@ -11,7 +11,7 @@ License: GPL-2+ or Artistic
 
 Files: debian/*
 Copyright: 2015-2016 Doug Torrance <dtorrance@piedmont.edu>
-License: GPL-2+
+License: GPL-2+ or Artistic
 
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
